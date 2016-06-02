@@ -101,6 +101,12 @@ private List<String> list = null;
 //		List<String> list = fe.readFileList(".\\src\\test\\resoures\\test2.txt");
 //		String path = "F:\\WorkSpace\\readfile\\src\\test\\resoures\\txt";
 //		fe.delete(path, list);
+//		String tempStr1 = "C:\\Users\\sunmd\\Desktop\\0527\\readfile";
+//		String tempStr2 = "C:\\Users\\sunmd\\Desktop\\0527\\123.txt";
+//		String tempStr3 = "C:\\Users\\sunmd\\Desktop\\0530\\jmd\\txt";
+//		fe.writeText(tempStr1, tempStr2);
+//		List<String> list = fe.readFileList(tempStr2);
+//		fe.delete(tempStr3, list);
 //	}
 
 }

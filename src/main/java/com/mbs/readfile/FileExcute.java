@@ -148,12 +148,13 @@ public class FileExcute {
 	 * @param deletePath 需要删除的对应路径
 	 * @param list 删除的白名单
 	 */
-	public void delete(String deletePath, List<String> list) {
+	public List<String> delete(String deletePath, List<String> list) {
 		logger.debug("delete deletePath = " + deletePath);
+		List<String> reList = null;
 		File file = new File(deletePath);
 		if (file.exists() && file.isDirectory()) {
 			String str = "";
-			
+			reList = new ArrayList<String>();
 			File[] subFiles = file.listFiles(new TextFilter());
 			//对于搜索到的文件进行循环查看
 			for (int i = 0; i < subFiles.length; i++) {
@@ -170,9 +171,14 @@ public class FileExcute {
 				if (!flag) {//如果没有搜索到就进行删除
 					logger.debug("delete deleteFile = " + str);
 					subFiles[i].delete();
+					reList.add(" 删除  - " + str);
+				}else {
+					reList.add(" 保存  - " + str);
 				}
 			}
 		}
+		return reList;
+		
 	}
 
 	/**
@@ -180,11 +186,11 @@ public class FileExcute {
 	 * @param FilePath 获取的文件路径
 	 * @param WritePath 写入文件路径
 	 */
-	public void writeText(String filePath, String writePath) {
+	public File[] writeText(String filePath, String writePath) {
 		logger.debug("writeText filePath = " + filePath + "&writePath = " + writePath);
 		File file = new File(filePath);
 		File[] subFiles = file.listFiles(new TextFilter());
-
+		logger.debug("file = " + file.getName() + "&subFiles.length = " + subFiles.length);
 		OutputStream os = null;
 		BufferedWriter buffWrite = null;
 		OutputStreamWriter osw = null;
@@ -224,7 +230,12 @@ public class FileExcute {
 				os = null;
 			}
 		}
+		return subFiles;
 
+	}
+	
+	public File[] writeText(File filePath, File write){
+		return writeText(filePath.getAbsolutePath(), write.getAbsolutePath());
 	}
 
 }
